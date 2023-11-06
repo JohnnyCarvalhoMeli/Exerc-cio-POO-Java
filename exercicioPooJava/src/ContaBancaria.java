@@ -1,21 +1,36 @@
+import java.util.ArrayList;
+
 public class ContaBancaria {
 
 
-    String nomeTitular, dataAbertura;
-    int numero, agencia;
-    Double saldo;
+    private String nomeTitular, dataAbertura;
+    private int id;
 
-    public ContaBancaria(String nomeTitular, String dataAbertura, int numero, int agencia, Double saldo) {
+    private Long numero, agencia;
+
+    private Double saldo = 0.00;
+    private DataConta data = new DataConta();
+    ArrayList<String> contas = new ArrayList<>();
+
+    public ContaBancaria(String nomeTitular, String dataAbertura, Long numero, Long agencia, int identificador, Double saldo) {
         this.nomeTitular = nomeTitular;
         this.dataAbertura = dataAbertura;
         this.numero = numero;
         this.agencia = agencia;
+        this.id = identificador;
         this.saldo = saldo;
     }
 
     public ContaBancaria() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNomeTitular() {
         return nomeTitular;
@@ -33,19 +48,27 @@ public class ContaBancaria {
         this.dataAbertura = dataAbertura;
     }
 
-    public int getNumero() {
+    public DataConta getData() {
+        return data;
+    }
+
+    public void setData(DataConta data) {
+        this.data = data;
+    }
+
+    public Long getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Long numero) {
         this.numero = numero;
     }
 
-    public int getAgencia() {
+    public Long getAgencia() {
         return agencia;
     }
 
-    public void setAgencia(int agencia) {
+    public void setAgencia(Long agencia) {
         this.agencia = agencia;
     }
 
@@ -57,7 +80,40 @@ public class ContaBancaria {
         this.saldo = saldo;
     }
 
-    public void recuperarDadosParaImpressao() {
-        System.out.println("Aqui vai imprimir alguns dados do usuário.");
+    public void depositar(Double valor) {
+        this.saldo += valor;
+
+    }
+
+    public void sacar(Double valor) {
+        this.saldo -= valor;
+
+    }
+
+    public String recuperarDadosParaImpressao() {
+
+        String dados = "";
+
+        dados += "Id da conta: " + id;
+        dados += "\nTitular: " +nomeTitular;
+        dados += "\nNúmero da conta: " + numero;
+        dados += "\nAgência: " + agencia;
+        dados += "\nSaldo da conta R$: " + saldo;
+        dados += "\nData abertura da conta: " + dataAbertura;
+
+        return dados;
+    }
+
+    @Override
+    public String toString() {
+        return "ContaBancaria{" +
+                "nomeTitular='" + nomeTitular + '\'' +
+                ", dataAbertura='" + dataAbertura + '\'' +
+                ", id=" + id +
+                ", numero=" + numero +
+                ", agencia=" + agencia +
+                ", saldo=" + saldo +
+                ", data=" + data +
+                '}';
     }
 }
